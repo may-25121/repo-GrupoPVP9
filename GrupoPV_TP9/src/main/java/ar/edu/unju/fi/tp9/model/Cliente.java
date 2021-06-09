@@ -5,6 +5,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -13,6 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.Valid;
@@ -26,6 +29,8 @@ import javax.validation.constraints.Size;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
+
+
 
 @Entity
 @Table(name = "CLIENTES")
@@ -87,29 +92,39 @@ public class Cliente {
 	 @OneToOne(cascade = CascadeType.ALL)
 	 @JoinColumn(name = "CUENTA_ID")
 	private Cuenta cuenta;
+	 
+	 @ManyToMany(mappedBy = "clientes")
+	 private List<Beneficio>beneficios = new ArrayList<Beneficio>();
 
-	public Cliente() {
-	}
 
+	 public Cliente() {
+			
+		}
+	 
 	public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
-			LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
-		this.tipoDocumento = tipoDocumento;
-		this.nroDocumento = nroDocumento;
-		this.nombreApellido = nombreApellido;
-		this.email = email;
-		this.password = password;
-		this.fechaNacimiento = fechaNacimiento;
-		this.edad = getEdad();
-		this.codigoAreaTelefono = codigoAreaTelefono;
-		this.nroTelefono = nroTelefono;
-		this.fechaUltimaCompra = fechaUltimaCompra;
-	}
-	
+				LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
+			this.tipoDocumento = tipoDocumento;
+			this.nroDocumento = nroDocumento;
+			this.nombreApellido = nombreApellido;
+			this.email = email;
+			this.password = password;
+			this.fechaNacimiento = fechaNacimiento;
+			this.edad = getEdad();
+			this.codigoAreaTelefono = codigoAreaTelefono;
+			this.nroTelefono = nroTelefono;
+			this.fechaUltimaCompra = fechaUltimaCompra;
+		}
+
+
+
+
+
 
 	public Cuenta getCuenta() {
 		return cuenta;
 	}
 
+	
 	public void setCuenta(Cuenta cuenta) {
 		this.cuenta = cuenta;
 	}
@@ -250,6 +265,15 @@ public class Cliente {
 		return texto;
 	}
 
+
+	public List<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+
+	public void setBeneficios(List<Beneficio> beneficios) {
+		this.beneficios = beneficios;
+	}
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
@@ -260,5 +284,5 @@ public class Cliente {
 	}
 
 	
-
+	
 }
