@@ -6,6 +6,6 @@ import ar.edu.unju.fi.tp9.model.Cliente;
 
 public interface IClienteDAO extends CrudRepository<Cliente, Long> {
 	
-	
+	public Cliente findById(int id);
 
 }
