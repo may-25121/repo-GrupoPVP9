@@ -101,7 +101,8 @@ public class Cliente {
 			
 		}
 	 
-	public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
+	
+	 public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
 				LocalDate fechaNacimiento, int edad, int codigoAreaTelefono, int nroTelefono, LocalDate fechaUltimaCompra) {
 			this.tipoDocumento = tipoDocumento;
 			this.nroDocumento = nroDocumento;
@@ -114,9 +115,6 @@ public class Cliente {
 			this.nroTelefono = nroTelefono;
 			this.fechaUltimaCompra = fechaUltimaCompra;
 		}
-
-
-
 
 
 
@@ -274,6 +272,7 @@ public class Cliente {
 		this.beneficios = beneficios;
 	}
 
+
 	@Override
 	public String toString() {
 		return "Cliente [id=" + id + ", tipoDocumento=" + tipoDocumento + ", nroDocumento=" + nroDocumento
@@ -282,6 +281,9 @@ public class Cliente {
 				+ codigoAreaTelefono + ", nroTelefono=" + nroTelefono + ", fechaUltimaCompra=" + fechaUltimaCompra
 				+ ", cuenta=" + cuenta + "]";
 	}
+
+
+
 
 	
 	

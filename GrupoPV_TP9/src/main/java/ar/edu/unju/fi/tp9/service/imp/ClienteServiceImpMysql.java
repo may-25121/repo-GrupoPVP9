@@ -49,4 +49,11 @@ public class ClienteServiceImpMysql implements IClienteService{
 		
 	}
 
+	@Override
+	public Cliente getClientePorId(int id) {
+		Cliente cliente=clienteDAO.findById(id);
+		return cliente;
+	}
+
+	
 }

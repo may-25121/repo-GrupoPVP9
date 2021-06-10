@@ -14,8 +14,7 @@ public interface IClienteService {
 	public void generarListaClientes();
 	public Optional<Cliente>getClientePorId(Long id);
 	public void borrarCliente(Long id);
-
-	
+	public Cliente getClientePorId(int id);
 	
 
 }
