@@ -40,13 +40,20 @@ public class ClienteController {
 		model.addAttribute("cliente",cliente);
 		return "form-cliente";
 	}
-	
+
 	@GetMapping("/cliente/editar/{id}")
 	public String getEditarPage(@PathVariable Long id, Model model) {
 		Optional<Cliente> cliente = clienteService.getClientePorId(id);
 		model.addAttribute("cliente", cliente);
 		return "form-cliente";
 	}
+	/*	
+	@GetMapping("/cliente/editar/{id}")
+	public String getEditarPage(@PathVariable long id, Model model) {
+		Cliente cliente = clienteService.getClienteId(id);
+		model.addAttribute("cliente", cliente);
+		return "form-cliente";
+	}*/
 	
 	@GetMapping("/cliente/borrar/{id}")
 	public String getBorrarPage(@PathVariable Long id, Model model) {

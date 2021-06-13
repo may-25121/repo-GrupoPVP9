@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org" lang="es">
+	<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1">
+	<title>Formulario</title>
+	<link rel="stylesheet" th:href="@{/webjars/bootstrap/4.6.0/css/bootstrap.min.css}">
+	<link rel="stylesheet" th:href="@{/css/styles.css}">
+	</head>
+	<body>
+		<header th:insert="layout/header :: header"></header>
+		<div class="container mb-5">
+			<div class="row">
+				<div class="col-12">
+					<h2 class="text-center mb-5 text-uppercase">Formulario de Beneficios</h2>
+				</div>
+				<form action="/beneficio/guardar" class="col-sm-12 col-md-9 mb-3" th:object="${beneficio}" method="POST">
+					<input type="hidden" th:field="*{id}" />
+					<div class="p-5 mx-3 border">
+						<div class="form-group row d-flex justify-content-end">
+							<label for="descripcion" class="col-sm-3 col-form-label">Descripcion:</label><br>
+							<input type="text" id="descripcion" class="form-control col-sm-9" placeholder="Ingrese descripcion" th:field="*{descripcion}">
+							<!--  <div class="alert alert-danger col-sm-9 mt-1" role="alert" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>-->
+						</div>
+						<div class="d-flex justify-content-center mt-5">
+							<button type="submit" class="btn btn-primary text-center" value="Enviar">Guardar</button>
+						</div>
+					</div>
+					<div class="row">
+					<div class="col-sm-12 d-flex justify-content-between">
+						<div class="col-md-6">
+							<table class="table text-nowrap" border="1">
+								<h5 class="text-center">Clientes que disponen del beneficio</h5>
+								<thead>
+									<tr class="text-center">
+										<th scope="col">Nro Doc.</th>
+										<th scope="col">Nombre y Apellido</th>
+										<th scope="col">Acciones</th>
+									</tr>
+								</thead>
+								<tbody align="center">
+									<tr th:each="c:${clientesbeneficios}">
+										<td th:text="${c.nroDocumento}"></td>
+										<td th:text="${#strings.toUpperCase(c.nombreApellido)}"></td>
+										<td><a class="btn btn-danger">X</a></td>
+									</tr>
+								</tbody>
+							</table>	
+						</div>
+						
+						<div class="col-md-6">
+							<table class="table text-nowrap" border="1">
+								<h5 class="text-center">Clientes disponibles</h5>
+								<thead>
+									<tr class="text-center">
+										<th scope="col">Nro Doc.</th>
+										<th scope="col">Nombre y Apellido</th>
+										<th scope="col">Acciones</th>
+									</tr>
+								</thead>
+								<tbody align="center">
+									<tr th:each="c:${clientesdisponibles}">
+										<td><a class="btn btn-success" th:href="@{/beneficio/{idbeneficio}/cliente/agregar/{idcliente} (idbeneficio=*{id}, idcliente=${c.id})}"><=</a></td>
+										<!--<td><a class="btn btn-success" th:href="@{/beneficio/{idbeneficio}/cliente/agregar/{idcliente} (idbeneficio=${beneficio.id}, idcliente=${c.id})}"><=</a></td>-->
+										<td th:text="${c.nroDocumento}"></td>
+										<td th:text="${#strings.toUpperCase(c.nombreApellido)}"></td>
+									</tr>
+								</tbody>
+							</table>	
+						</div>	
+					</div>
+				</div>
+				</form>
+				<aside class="col-sm-12 col-md-3 text-center" th:insert="layout/publicidad :: aside"></aside>	
+			</div>
+		</div>
+		
+		<footer th:insert="layout/footer :: footer"></footer>
+		
+		<script type="text/javascript" th:src="@{/webjars/jquery/3.5.1/jquery.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/popper.js/1.16.0/popper.min.js}"></script>
+		<script type="text/javascript" th:src="@{/webjars/bootstrap/4.6.0/js/bootstrap.min.js}"></script>
+	</body>
+</html>

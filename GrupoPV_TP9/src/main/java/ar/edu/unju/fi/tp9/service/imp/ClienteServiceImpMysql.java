@@ -46,12 +46,12 @@ public class ClienteServiceImpMysql implements IClienteService{
 
 	public void borrarCliente(Long id) {
 		clienteDAO.deleteById(id);
-		
 	}
 
 	@Override
-	public Cliente getClientePorId(int id) {
-		Cliente cliente=clienteDAO.findById(id);
+	public Cliente getClienteId(Long id) {
+		Cliente cliente = clienteDAO.findById((long)id);
+		System.out.println("cliente buscado:"+cliente.toString());
 		return cliente;
 	}
 
