@@ -1,4 +1,4 @@
-package ar.edu.unju.fi.tp9.model;
+ package ar.edu.unju.fi.tp9.model;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -15,9 +15,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
 import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
@@ -40,7 +42,7 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "CLIENTE_ID")
-	private long id;
+	private Long id;
 	
 	@Column(name = "TIPO_DOCUMENTO")
 	@NotBlank(message = "Ingrese un tipo de documento")
@@ -92,14 +94,23 @@ public class Cliente {
 	 @OneToOne(cascade = CascadeType.ALL)
 	 @JoinColumn(name = "CUENTA_ID")
 	private Cuenta cuenta;
-	 
+	
+	 /*
 	 @ManyToMany(mappedBy = "clientes")
 	 private List<Beneficio>beneficios = new ArrayList<Beneficio>();
-
+	  */
+	 
+	 @ManyToMany
+	 @JoinTable(name="CLIENTE_BENEFICIO", 
+	 			joinColumns = { @JoinColumn(name="CLIENTE_ID") },
+	 			inverseJoinColumns = @JoinColumn(name="BENEFICIO_ID"))
+	// @Column(name = "beneficios")
+	 private List<Beneficio> beneficios = new ArrayList<Beneficio>();
 
 	 public Cliente() {
 			
 		}
+	 
 	 
 	
 	 public Cliente(String tipoDocumento, int nroDocumento, String nombreApellido, String email, String password,
@@ -127,11 +138,11 @@ public class Cliente {
 		this.cuenta = cuenta;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -263,10 +274,22 @@ public class Cliente {
 		return texto;
 	}
 
-
+		
+/*
 	public List<Beneficio> getBeneficios() {
 		return beneficios;
 	}
+
+	public void setBeneficios(List<Beneficio> beneficios) {
+		this.beneficios = beneficios;
+	}*/
+
+	
+	public List<Beneficio> getBeneficios() {
+		return beneficios;
+	}
+
+
 
 	public void setBeneficios(List<Beneficio> beneficios) {
 		this.beneficios = beneficios;
@@ -284,7 +307,5 @@ public class Cliente {
 
 
 
-
-	
 	
 }

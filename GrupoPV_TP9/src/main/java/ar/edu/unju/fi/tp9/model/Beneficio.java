@@ -8,8 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
+//import javax.persistence.JoinColumn;
+//import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
@@ -28,11 +28,17 @@ public class Beneficio {
 	@Column(name = "BENEFICIO_DESCRIPCION")
 	private  String descripcion;
 	
-	@ManyToMany
-	@JoinTable(name = "BENEFICIO_CLIENTE",joinColumns = @JoinColumn(name="BENEFICIO_ID"),inverseJoinColumns = @JoinColumn(name="CLIENTE_ID"))
-	private List<Cliente>clientes = new ArrayList<Cliente>();
+	/*@ManyToMany
+	@JoinTable(name = "BENEFICIO_CLIENTE",
+				joinColumns = @JoinColumn(name="BENEFICIO_ID"),
+				inverseJoinColumns = @JoinColumn(name="CLIENTE_ID"))
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+*/
 	
-	
+	@ManyToMany(mappedBy="beneficios")
+	@Column(name = "clientes")
+	private List<Cliente> clientes = new ArrayList<Cliente>();
+		
 	public Beneficio() {
 	}
 
@@ -63,7 +69,7 @@ public class Beneficio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-
+/*
 
 	public List<Cliente> getClientes() {
 		return clientes;
@@ -73,12 +79,25 @@ public class Beneficio {
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
 	}
+*/
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
 
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+	
+	
 
 	@Override
 	public String toString() {
-		return "Beneficio [id=" + id + ", descripcion=" + descripcion + ", clientes=" + clientes + "]";
+		return "Beneficio [id=" + id + ", descripcion=" + descripcion ;
 	}
+
+
+
 	
 	
 
