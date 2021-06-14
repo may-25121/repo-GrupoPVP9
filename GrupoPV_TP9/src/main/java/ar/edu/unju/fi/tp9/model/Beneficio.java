@@ -28,13 +28,6 @@ public class Beneficio {
 	@Column(name = "BENEFICIO_DESCRIPCION")
 	private  String descripcion;
 	
-	/*@ManyToMany
-	@JoinTable(name = "BENEFICIO_CLIENTE",
-				joinColumns = @JoinColumn(name="BENEFICIO_ID"),
-				inverseJoinColumns = @JoinColumn(name="CLIENTE_ID"))
-	private List<Cliente> clientes = new ArrayList<Cliente>();
-*/
-	
 	@ManyToMany(mappedBy="beneficios")
 	@Column(name = "clientes")
 	private List<Cliente> clientes = new ArrayList<Cliente>();
@@ -69,17 +62,7 @@ public class Beneficio {
 	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
-/*
 
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-*/
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
