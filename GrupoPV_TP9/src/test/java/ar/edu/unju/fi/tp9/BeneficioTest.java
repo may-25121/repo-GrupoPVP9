@@ -29,8 +29,12 @@ class BeneficioTest {
 	
 	@Test
 	void test() {
+		
+		
+		
+		
 		//List<Cliente>clientes= new ArrayList<Cliente>();
-		List<Beneficio> beneficios= new ArrayList<Beneficio>();
+		/*List<Beneficio> beneficios= new ArrayList<Beneficio>();
 		Beneficio beneficio= new Beneficio();
 		
 		Cliente cliente1 = new Cliente();

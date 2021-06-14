@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.tp9.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -33,6 +36,7 @@ public class BeneficioController {
 	public String getBeneficioNuevoPage(Model model) {
 		this.beneficio=new Beneficio();
 		model.addAttribute("beneficio", this.beneficio);
+		model.addAttribute("clientesdisponibles", this.clienteService.getClientes());
 		return "nuevobeneficio";
 	}
 	
@@ -61,34 +65,62 @@ public class BeneficioController {
 			System.out.println(e.getMessage());
 		}
 		model.addAttribute("beneficios", beneficioService.getAllBeneficios());
+		
 		return "listarbeneficios";
 	}
 	
 	@GetMapping("/beneficio/borrar/{id}")
 	public String DeleteBeneficioPage(@PathVariable Long id, Model model) {
+		List<Cliente> clientes = beneficioService.getBeneficioId(id).getClientes();
+		clienteService.quitarBeneficioCliente(clientes,id);
 		beneficioService.deleteBeneficio(id);
 		model.addAttribute("beneficios", beneficioService.getAllBeneficios());
 		return "listarbeneficios";
 	}
 	
+	
 	@GetMapping("/beneficio/{idbeneficio}/cliente/agregar/{idcliente}")
 	public String agregarClienteBeneficio(@PathVariable(name="idbeneficio") Long idbeneficio, @PathVariable(name="idcliente") Long idcliente, Model model) {
-		
-		Beneficio beneficio = beneficioService.getBeneficioId(idbeneficio);
+		this.beneficio = beneficioService.getBeneficioId(idbeneficio);
 		Cliente cliente = clienteService.getClientePorId(idcliente).get();
-		System.out.println("ATIBUTOS DEL BENEFICIO -> "+cliente);
-		//POR AQUI ME QUEDE
-		cliente.getBeneficios().add(beneficio);
-		System.out.println("ATIBUTOS DEL CLIENTE -> "+cliente);
+		cliente.getBeneficios().add(this.beneficio);
+		
 		try {
 			clienteService.addCliente(cliente);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
 		
+		this.beneficio = beneficioService.getBeneficioId(idbeneficio);
+		model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
+		model.addAttribute("beneficio", this.beneficio);
+		model.addAttribute("clientesdisponibles", this.clienteService.getClientes());
+		return "nuevobeneficio";
+	}
+	
+	
+	@GetMapping("/beneficio/{idbeneficio}/cliente/quitar/{idcliente}")
+	public String quitarClienteBeneficio(@PathVariable(name="idbeneficio") Long idbeneficio, @PathVariable(name="idcliente") Long idcliente, Model model) {
+		 //PROGRAMAR LA LOGICA
+		Beneficio beneficio = beneficioService.getBeneficioId(idbeneficio);
+		Cliente cliente = clienteService.getClientePorId(idcliente).get();
+		
+		clienteService.quitarUnClienteBeneficio(beneficio, cliente);
+		
+		//clienteService.getClientePorId(idcliente).get().setBeneficios(beneficio.get);
+		//clienteService.quitarUnClienteBeneficio(idbeneficio, idcliente);
+	//	this.beneficio =  beneficioService.getBeneficioId(idbeneficio);
+		model.addAttribute("clientesbeneficios", beneficioService.getBeneficioId(idbeneficio).getClientes());
+		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
+		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
+		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
+		model.addAttribute("beneficio", beneficioService.getBeneficioId(idbeneficio));
 		model.addAttribute("clientesdisponibles", this.clienteService.getClientes());
 		
 		return "nuevobeneficio";
 	}
+
+	
+	
 
 }

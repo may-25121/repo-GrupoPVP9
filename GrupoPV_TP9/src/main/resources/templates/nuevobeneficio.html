@@ -26,7 +26,8 @@
 							<button type="submit" class="btn btn-primary text-center" value="Enviar">Guardar</button>
 						</div>
 					</div>
-					<div class="row">
+					
+					<div class="row" th:if="${beneficio.id != null}">
 					<div class="col-sm-12 d-flex justify-content-between">
 						<div class="col-md-6">
 							<table class="table text-nowrap" border="1">
@@ -42,7 +43,7 @@
 									<tr th:each="c:${clientesbeneficios}">
 										<td th:text="${c.nroDocumento}"></td>
 										<td th:text="${#strings.toUpperCase(c.nombreApellido)}"></td>
-										<td><a class="btn btn-danger">X</a></td>
+										<td><a class="btn btn-danger" th:href="@{/beneficio/{idbeneficio}/cliente/quitar/{idcliente} (idbeneficio=*{id}, idcliente=${c.id})}">X</a></td>
 									</tr>
 								</tbody>
 							</table>	

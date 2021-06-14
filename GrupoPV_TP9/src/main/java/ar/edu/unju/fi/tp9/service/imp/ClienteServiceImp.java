@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
+import ar.edu.unju.fi.tp9.model.Beneficio;
 import ar.edu.unju.fi.tp9.model.Cliente;
 import ar.edu.unju.fi.tp9.service.IClienteService;
 import ar.edu.unju.fi.tp9.util.TablaCliente;
@@ -72,6 +73,18 @@ public class ClienteServiceImp implements IClienteService{
 	public Cliente getClienteId(Long id) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public void quitarBeneficioCliente(List<Cliente> clientes, Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void quitarUnClienteBeneficio(Beneficio beneficio, Cliente cliente) {
+		// TODO Auto-generated method stub
+		
 	}
 
 

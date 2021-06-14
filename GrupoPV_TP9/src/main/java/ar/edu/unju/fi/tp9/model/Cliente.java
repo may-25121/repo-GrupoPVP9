@@ -104,7 +104,7 @@ public class Cliente {
 	 @JoinTable(name="CLIENTE_BENEFICIO", 
 	 			joinColumns = { @JoinColumn(name="CLIENTE_ID") },
 	 			inverseJoinColumns = @JoinColumn(name="BENEFICIO_ID"))
-	// @Column(name = "beneficios")
+	 @Column(name = "beneficios")
 	 private List<Beneficio> beneficios = new ArrayList<Beneficio>();
 
 	 public Cliente() {
