@@ -1,6 +1,5 @@
 package ar.edu.unju.fi.tp9.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,26 +100,21 @@ public class BeneficioController {
 	
 	@GetMapping("/beneficio/{idbeneficio}/cliente/quitar/{idcliente}")
 	public String quitarClienteBeneficio(@PathVariable(name="idbeneficio") Long idbeneficio, @PathVariable(name="idcliente") Long idcliente, Model model) {
-		 //PROGRAMAR LA LOGICA
-		Beneficio beneficio = beneficioService.getBeneficioId(idbeneficio);
+		this.beneficio = beneficioService.getBeneficioId(idbeneficio);
 		Cliente cliente = clienteService.getClientePorId(idcliente).get();
-		
-		clienteService.quitarUnClienteBeneficio(beneficio, cliente);
-		
-		//clienteService.getClientePorId(idcliente).get().setBeneficios(beneficio.get);
-		//clienteService.quitarUnClienteBeneficio(idbeneficio, idcliente);
-	//	this.beneficio =  beneficioService.getBeneficioId(idbeneficio);
-		model.addAttribute("clientesbeneficios", beneficioService.getBeneficioId(idbeneficio).getClientes());
-		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
-		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
-		//model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
-		model.addAttribute("beneficio", beneficioService.getBeneficioId(idbeneficio));
+		cliente.getBeneficios().remove(this.beneficio);
+		try {
+			clienteService.addCliente(cliente);
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+
+		this.beneficio = beneficioService.getBeneficioId(idbeneficio);
+		model.addAttribute("clientesbeneficios", this.beneficio.getClientes());
+		model.addAttribute("beneficio", this.beneficio);
 		model.addAttribute("clientesdisponibles", this.clienteService.getClientes());
-		
+
 		return "nuevobeneficio";
 	}
-
-	
-	
 
 }

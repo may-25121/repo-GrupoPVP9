@@ -94,11 +94,6 @@ public class Cliente {
 	 @OneToOne(cascade = CascadeType.ALL)
 	 @JoinColumn(name = "CUENTA_ID")
 	private Cuenta cuenta;
-	
-	 /*
-	 @ManyToMany(mappedBy = "clientes")
-	 private List<Beneficio>beneficios = new ArrayList<Beneficio>();
-	  */
 	 
 	 @ManyToMany
 	 @JoinTable(name="CLIENTE_BENEFICIO", 

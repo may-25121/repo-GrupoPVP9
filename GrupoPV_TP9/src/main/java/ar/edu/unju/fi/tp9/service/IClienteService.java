@@ -3,7 +3,6 @@ package ar.edu.unju.fi.tp9.service;
 import java.util.List;
 import java.util.Optional;
 
-import ar.edu.unju.fi.tp9.model.Beneficio;
 import ar.edu.unju.fi.tp9.model.Cliente;
 
 public interface IClienteService {
@@ -16,6 +15,5 @@ public interface IClienteService {
 	public void borrarCliente(Long id);
 	public Cliente getClienteId(Long id);
 	public void quitarBeneficioCliente(List<Cliente> clientes, Long id);
-	public void quitarUnClienteBeneficio(Beneficio beneficio, Cliente cliente);
 
 }
