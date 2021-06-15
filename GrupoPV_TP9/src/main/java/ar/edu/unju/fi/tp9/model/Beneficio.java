@@ -72,16 +72,10 @@ public class Beneficio {
 		this.clientes = clientes;
 	}
 	
-	
-
 	@Override
 	public String toString() {
 		return "Beneficio [id=" + id + ", descripcion=" + descripcion ;
 	}
 
-
-
-	
-	
 
 }

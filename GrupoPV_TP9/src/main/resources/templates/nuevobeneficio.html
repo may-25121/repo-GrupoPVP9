@@ -20,7 +20,6 @@
 						<div class="form-group row d-flex justify-content-end">
 							<label for="descripcion" class="col-sm-3 col-form-label">Descripcion:</label><br>
 							<input type="text" id="descripcion" class="form-control col-sm-9" placeholder="Ingrese descripcion" th:field="*{descripcion}">
-							<!--  <div class="alert alert-danger col-sm-9 mt-1" role="alert" th:if="${#fields.hasErrors('descripcion')}" th:errors="*{descripcion}"></div>-->
 						</div>
 						<div class="d-flex justify-content-center mt-5">
 							<button type="submit" class="btn btn-primary text-center" value="Enviar">Guardar</button>
@@ -62,7 +61,6 @@
 								<tbody align="center">
 									<tr th:each="c:${clientesdisponibles}">
 										<td><a class="btn btn-success" th:href="@{/beneficio/{idbeneficio}/cliente/agregar/{idcliente} (idbeneficio=*{id}, idcliente=${c.id})}"><=</a></td>
-										<!--<td><a class="btn btn-success" th:href="@{/beneficio/{idbeneficio}/cliente/agregar/{idcliente} (idbeneficio=${beneficio.id}, idcliente=${c.id})}"><=</a></td>-->
 										<td th:text="${c.nroDocumento}"></td>
 										<td th:text="${#strings.toUpperCase(c.nombreApellido)}"></td>
 									</tr>

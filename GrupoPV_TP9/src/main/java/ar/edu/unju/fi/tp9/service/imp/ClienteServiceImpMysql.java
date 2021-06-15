@@ -75,40 +75,6 @@ public class ClienteServiceImpMysql implements IClienteService{
 			}
 			clienteDAO.findById(c.getId()).get().setBeneficios(beneficiosactuales);
 		}
-		
 	}
-	
-	
-	//CORREGIR METODO
-	@Override
-	public void quitarUnClienteBeneficio(Beneficio beneficio, Cliente cliente) {
-		List<Beneficio> beneficios = new ArrayList<>();
-		List<Cliente> clientes = new ArrayList<>();
-		//List<Beneficio> beneficios = clienteDAO.findById(idcliente).get().getBeneficios();
-		for(int i=0;i<=cliente.getBeneficios().size()-1;i++) {
-			if(cliente.getBeneficios().get(i).getId() != beneficio.getId()) {
-				beneficios.add(cliente.getBeneficios().get(i));
-			}
-		}
-		
-		//beneficios=cliente.getBeneficios();
-		clienteDAO.findById(cliente.getId()).get().setBeneficios(beneficios);
-		
-		for(int i=0;i<=beneficio.getClientes().size()-1;i++) {
-			if(beneficio.getClientes().get(i).getId()==cliente.getId()) {
-				clientes.add(beneficio.getClientes().get(i));
-			}
-		}
-		
-		//clientes =beneficio.getClientes();
-		beneficioDAO.findById(beneficio.getId()).get().setClientes(clientes);
-		
-		
-		
- 
-		
-		
-	}
-
 	
 }

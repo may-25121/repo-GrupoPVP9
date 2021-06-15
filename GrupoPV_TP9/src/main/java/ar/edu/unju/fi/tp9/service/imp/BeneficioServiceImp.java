@@ -44,7 +44,5 @@ public class BeneficioServiceImp implements IBeneficioService{
 	public void deleteBeneficio(Long id) {
 		beneficioDAO.deleteById(id);
 	}
-	
-	
 
 }
